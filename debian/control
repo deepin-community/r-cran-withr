@@ -1,0 +1,26 @@
+Source: r-cran-withr
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Uploaders: Andreas Tille <tille@debian.org>
+Section: gnu-r
+Testsuite: autopkgtest-pkg-r
+Priority: optional
+Build-Depends: debhelper-compat (= 13),
+               dh-r,
+               r-base-dev
+Standards-Version: 4.5.1
+Vcs-Browser: https://salsa.debian.org/r-pkg-team/r-cran-withr
+Vcs-Git: https://salsa.debian.org/r-pkg-team/r-cran-withr.git
+Homepage: https://cran.r-project.org/package=withr
+Rules-Requires-Root: no
+
+Package: r-cran-withr
+Architecture: all
+Depends: ${R:Depends},
+         ${misc:Depends}
+Recommends: ${R:Recommends}
+Suggests: ${R:Suggests}
+Description: GNU R package to run code 'With' temporarily modified global state
+ A set of functions to run code 'with' safely and temporarily
+ modified global state. Many of these functions were originally a part of the
+ 'devtools' package, this provides a simple package with limited dependencies
+ to provide access to these functions.
