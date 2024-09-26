@@ -5,12 +5,22 @@
 \alias{with_}
 \title{Create a new "with" or "local" function}
 \usage{
-local_(set, reset = set, envir = parent.frame(), new = TRUE, dots = FALSE)
+local_(
+  set,
+  reset = set,
+  get = NULL,
+  ...,
+  envir = parent.frame(),
+  new = TRUE,
+  dots = FALSE
+)
 
-with_(set, reset = set, envir = parent.frame(), new = TRUE)
+with_(set, reset = set, get = NULL, ..., envir = parent.frame(), new = TRUE)
 }
 \arguments{
 \item{set}{\verb{[function(...)]}\cr Function used to set the state.
+The return value from this function should be the old state, which will
+then be passed back into the \code{reset()} function to clean up the state.
 The function can have arbitrarily many arguments, they will be replicated
 in the formals of the returned function.}
 
@@ -18,6 +28,16 @@ in the formals of the returned function.}
 The first argument can be named arbitrarily, further arguments with default
 values, or a "dots" argument, are supported but not used: The function will
 be called as \code{reset(old)}.}
+
+\item{get}{\verb{[function(...)]}\cr Optionally, a getter function. If
+supplied, the \code{on.exit()} restoration is set up \emph{before} calling
+\code{set}. This is more robust in edge cases.
+
+For technical reasons, this getter function must have the same
+interface as \code{set}, which means it is passed the new values as
+well. These can be safely ignored.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{envir}{\verb{[environment]}\cr Environment of the returned function.}
 
