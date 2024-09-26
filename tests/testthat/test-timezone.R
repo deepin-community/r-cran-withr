@@ -1,5 +1,3 @@
-context("timezone")
-
 describe("with_timezone", {
   it("changes the time zone", {
     expect_equal(with_timezone("CET", Sys.timezone()), "CET")
@@ -7,7 +5,7 @@ describe("with_timezone", {
     expect_true(
       with_timezone("CET", format(Sys.time(), "%Z")) %in% c("CET", "CEST"))
     expect_true(
-      with_timezone("US/Pacific", format(Sys.time(), "%Z")) %in% c("PDT", "PST"))
+      with_timezone("America/Los_Angeles", format(Sys.time(), "%Z")) %in% c("PDT", "PST"))
 
   })
 
@@ -17,7 +15,7 @@ describe("with_timezone", {
     expect_identical(cur, Sys.timezone())
 
     cur <- Sys.timezone()
-    expect_equal(with_timezone("US/Pacific", Sys.timezone()), "US/Pacific")
+    expect_equal(with_timezone("America/Los_Angeles", Sys.timezone()), "America/Los_Angeles")
     expect_identical(cur, Sys.timezone())
   })
 })
@@ -32,8 +30,8 @@ describe("local_timezone", {
       with_timezone("CET", Sys.timezone()),
       fun("CET"))
     expect_identical(
-      with_timezone("US/Pacific", Sys.timezone()),
-      fun("US/Pacific"))
+      with_timezone("America/Los_Angeles", Sys.timezone()),
+      fun("America/Los_Angeles"))
   })
 
   it("restores the time zone", {
@@ -44,7 +42,7 @@ describe("local_timezone", {
     }
     fun("CET")
     expect_identical(cur, Sys.timezone())
-    fun("US/Pacific")
+    fun("America/Los_Angeles")
     expect_identical(cur, Sys.timezone())
   })
 })

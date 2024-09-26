@@ -2,6 +2,7 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: withr
 Upstream-Contact: Jim Hester <james.f.hester@gmail.com>
 Source: https://cran.r-project.org/package=withr
+Files-Excluded: */inst/doc/*.html
 
 Files: *
 Copyright: 2015-29016 Jim Hester, Kirill Müller, Hadley Wickham,

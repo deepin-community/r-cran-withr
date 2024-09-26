@@ -1,13 +1,17 @@
 #!/bin/sh -e
 
-oname=withr
-pkg=r-cran-`echo $oname | tr '[A-Z]' '[a-z]'`
+debname=r-cran-withr
 
 if [ "$AUTOPKGTEST_TMP" = "" ] ; then
-  AUTOPKGTEST_TMP=`mktemp -d /tmp/${pkg}-test.XXXXXX`
-  trap "rm -rf $AUTOPKGTEST_TMP" 0 INT QUIT ABRT PIPE TERM
+    AUTOPKGTEST_TMP=`mktemp -d /tmp/${debname}-test.XXXXXX`
+    trap "rm -rf $AUTOPKGTEST_TMP" 0 INT QUIT ABRT PIPE TERM
 fi
 cd $AUTOPKGTEST_TMP
-cp -a /usr/share/doc/${pkg}/tests/* $AUTOPKGTEST_TMP
-find . -name "*.gz" -exec gunzip \{\} \;
-LC_ALL=C R --no-save < testthat.R
+cp -a /usr/share/doc/$debname/tests $AUTOPKGTEST_TMP
+gunzip -r *
+cd tests
+for testfile in *.R; do
+    echo "BEGIN TEST $testfile"
+    LC_ALL=C.UTF-8 R --no-save < $testfile
+done
+

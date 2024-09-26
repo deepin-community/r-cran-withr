@@ -1,3 +1,12 @@
 Tests: run-unit-test
-Depends: @, r-cran-testthat, r-cran-dbi, r-cran-rsqlite, r-cran-lattice
+Depends: @,
+         r-cran-callr,
+        r-cran-covr,
+        r-cran-dbi,
+        r-cran-knitr,
+        r-cran-lattice,
+        r-cran-rlang,
+        r-cran-rmarkdown (>= 2.12),
+        r-cran-rsqlite,
+        r-cran-testthat (>= 3.0.0)
 Restrictions: allow-stderr

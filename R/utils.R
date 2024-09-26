@@ -64,3 +64,36 @@ list_combine <- function(rhs, lhs) {
   }
   rhs
 }
+
+# Helper to implement `options()`-like splicing
+auto_splice <- function(x) {
+  if (length(x) == 1 && is.null(names(x)) && is.list(x[[1]])) {
+    x[[1]]
+  } else {
+    x
+  }
+}
+
+setNames <- function(x = nm, nm) {
+  names(x) <- nm
+  x
+}
+
+# base implementation of rlang::is_interactive()
+is_interactive <- function() {
+  opt <- getOption("rlang_interactive")
+  if (!is.null(opt)) {
+    return(opt)
+  }
+  if (knitr_in_progress()) {
+    return(FALSE)
+  }
+  if (identical(Sys.getenv("TESTTHAT"), "true")) {
+    return(FALSE)
+  }
+  interactive()
+}
+
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
+}
